@@ -1,0 +1,8 @@
+Q1. Art forgery - explain the problem and mention current solutions.
+
+Q2. Describe the advantages and disadvantages of using a blockchain solution.
+
+Q3. Design a network to help the art market. 
+    Think about Peers, CA, Channels and Smart Contracts. 
+    Make a critical analysis.
+    
