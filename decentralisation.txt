@@ -2,12 +2,32 @@ If you want to run the network on multiple hosts, you have a few options:
 
 Q1. You could run the nodes native on hosts. Why is this impractical?
 
+In that case all the network setup (IP translations, ports etc) would need
+to be maintained manually. This is very error prone in case of multiple
+nodes.
+
 Q2. You could use various services, e.g. Docker Swarm or Kubernetes. 
     Explain briefly Swarm and Kubernetes. Name some sources for the next steps
     to use them for Hyperledger Fabric.
     
+Both Swarm and Kubernetes allow for cluster management in multi-host environment,
+automatic scaling, service discovery, load balancing etc. Both these frameworks
+can be configured via Hyperledger Composer tool. Example for Fabric and 
+Kubernetes: https://github.com/IBM/blockchain-network-on-kubernetes
+    
 Q3. You can use IBM Cloud. Tell us what it offers in regard to Hyperledger
     Fabric.
     
+It allows to sign up to participate in the IBM Blockchain for Hyperledger 
+Fabric v1.0 beta program on IBM Cloud and build, run and manage it live:
+https://console.ng.bluemix.net/catalog/services/blockchain
+    
 Q4. There is a project called Hyperledger Cello. Explain, what it aims to do 
     and where one can learn more about it, as well how to get support.
+    
+Hyperledger Cello is a framework used to reduce the effort required for creating,
+managing and terminating blockchains. It provides a multi-tenant chain service 
+efficiently and automatically on top of various infrastructures, e.g., baremetal,
+virtual machine, and more container platforms.
+https://www.hyperledger.org/projects/cello
+
