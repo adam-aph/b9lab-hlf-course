@@ -6,7 +6,7 @@ networks:
 services:
   orderer.artxchg.com:
     image: hyperledger/fabric-orderer:x86_64-1.0.0
-    container_name: orderer.pcxchg.com
+    container_name: orderer.artxchg.com
     environment:
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
       - ORDERER_GENERAL_GENESISMETHOD=file

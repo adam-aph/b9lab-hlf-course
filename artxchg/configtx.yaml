@@ -44,6 +44,8 @@ Organizations:
         AnchorPeers:
             - Host: peer0.org1.artxchg.com
               Port: 7051
+            - Host: peer1.org1.artxchg.com
+              Port: 7051
 
     - &Org2
         Name: Org2MSP
@@ -53,6 +55,8 @@ Organizations:
 
         AnchorPeers:
             - Host: peer0.org2.artxchg.com
+              Port: 7051
+            - Host: peer1.org2.artxchg.com
               Port: 7051
 
     - &ArtMarket
