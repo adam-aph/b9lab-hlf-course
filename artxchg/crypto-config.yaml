@@ -1,0 +1,25 @@
+OrdererOrgs:
+  - Name: Orderer
+    Domain: artxchg.com
+    Specs:
+      - Hostname: orderer
+PeerOrgs:
+  - Name: Org1
+    Domain: org1.artxchg.com
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+  - Name: Org2
+    Domain: org2.artxchg.com
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+  - Name: ArtMarket
+    Domain: market.artxchg.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
