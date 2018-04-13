@@ -30,13 +30,13 @@ Q3. Design a network to help the art market. Think about Peers, CA, Channels
     and Smart Contracts. Make a critical analysis.
     
 The art market network can be designed in following way:
-- set of art dealers {ArtDealer1, ArtDealer2} which are 
+- set of art dealers {Org1, Org2} which are 
   connected to ArtMarket
 - each art dealer is able to "createArt"
 - the member of ArtMarket can "buyArt" or "sellArt"
 
 Permissions:
-- only members of {ArtDealer1, ArtDealer2} can "createArt"
+- only members of {Org1, Org2} can "createArt"
 - only members of ArtMarket can "buyArt" or "sellArt"
 - only the participants which are involved in an exchange transaction 
   should be able to see it
