@@ -1,0 +1,35 @@
+version: '2'
+
+networks:
+  ArtMarketCA:
+
+services:
+   ca.ArtMarket:
+     image: hyperledger/fabric-ca
+     container_name: ca.ArtMarket
+     ports:
+       - 7054:7054
+     environment:
+       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+       - FABRIC_CA_SERVER_CA_NAME=ca.ArtMarket
+     volumes:
+       - ./fabric-ca-server:/etc/hyperledger/fabric-ca-server
+     command: sh -c 'fabric-ca-server start -b admin:adminpw'
+     networks:
+      - ArtMarketCA
+
+   ca.client.ArtMarket:
+     tty: true
+     image: hyperledger/fabric-ca
+     container_name: admin-client
+     environment:
+       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-client
+       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+     volumes:
+       - ./fabric-ca-client:/etc/hyperledger/fabric-ca-client
+     depends_on:
+       - ca.ArtMarket
+     command: sh -c 'sleep 5;fabric-ca-client enroll -u http://admin:adminpw@ca.ArtMarket:7054;sleep 10000'
+     networks:
+      - ArtMarketCA
+      

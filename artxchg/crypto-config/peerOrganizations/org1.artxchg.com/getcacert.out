@@ -1,0 +1,3 @@
+2018/04/13 18:56:11 [INFO] User provided config file: crypto-config/peerOrganizations/org1.artxchg.com/fabric-ca-client-config.yaml
+2018/04/13 18:56:11 [INFO] Configuration file location: /home/adam/hlf/adam-h-code/artxchg/crypto-config/peerOrganizations/org1.artxchg.com/fabric-ca-client-config.yaml
+2018/04/13 18:56:11 [INFO] Stored CA root certificate at /home/adam/hlf/adam-h-code/artxchg/crypto-config/peerOrganizations/org1.artxchg.com/msp/cacerts/localhost-7102.pem
