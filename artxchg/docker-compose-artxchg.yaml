@@ -1,26 +1,45 @@
 version: '2'
 
 networks:
+  # network name
   artxchg:
 
 services:
   orderer.artxchg.com:
+    # name of service which will serve as an orderer in the fabric network
     image: hyperledger/fabric-orderer:x86_64-1.0.0
+    # container name for the image ‘hyperledger/fabric-orderer’ which will have its instance in the docker container
     container_name: orderer.artxchg.com
     environment:
+      # listening address for the orderer
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      # tells about the genesis block of this blockchain contains its information within a file
       - ORDERER_GENERAL_GENESISMETHOD=file
+      # location of  the genesis block info file
       - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      # id of the msp (Membership Service Provider) defined in the ‘cypto-config.yaml’ (which will be defined later) for Orderer in the fabric network
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      # directory location for the msp directory
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # enable the ‘Transport Layer Security’ for communicating with the orderer in the fabric network
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt
     volumes:
+      # mapping the directories that are being used in the environment configurations
       - ./orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-      - ./crypto-config/ordererOrganizations/artxchg.com/orderers/orderer.artxchg.com/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/artxchg.com/orderers/orderer.artxchg.com/msp:/var/hyperledger/orderer/msp 
+      - ./crypto-config/ordererOrganizations/artxchg.com/orderers/orderer.artxchg.com/tls:/var/hyperledger/orderer/tls
     command: orderer
+    # to start the orderer in the docker
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    # sets the working directory for the orderer
     ports:
+      # mapping the ports used by the docker internally
       - 7050:7050
     networks:
+      # # network name
       - artxchg
 
   peer0.org1.artxchg.com:
@@ -34,8 +53,14 @@ services:
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.artxchg.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org1.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer0.org1.artxchg.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer0.org1.artxchg.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer0.org1.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg.com/peers/peer0.org1.artxchg.com/msp:/etc/hyperledger/msp/peer
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     ports:
       - 8051:7051
       - 8053:7053
@@ -55,8 +80,14 @@ services:
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.artxchg.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org1.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer1.org1.artxchg.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer1.org1.artxchg.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer1.org1.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg.com/peers/peer1.org1.artxchg.com/msp:/etc/hyperledger/msp/peer
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     ports:
       - 9051:7051
       - 9053:7053
@@ -76,8 +107,14 @@ services:
       - CORE_PEER_LOCALMSPID=Org2MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.artxchg.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org2.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer0.org2.artxchg.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer0.org2.artxchg.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer0.org2.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg.com/peers/peer0.org2.artxchg.com/msp:/etc/hyperledger/msp/peer
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     ports:
       - 10051:7051
       - 10053:7053
@@ -97,8 +134,14 @@ services:
       - CORE_PEER_LOCALMSPID=Org2MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.artxchg.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org2.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer1.org2.artxchg.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer1.org2.artxchg.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer1.org2.artxchg.com/tls/ca.crt      
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg.com/peers/peer1.org2.artxchg.com/msp:/etc/hyperledger/msp/peer
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     ports:
       - 11051:7051
       - 11053:7053
@@ -118,8 +161,14 @@ services:
       - CORE_PEER_LOCALMSPID=ArtMarketMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.market.artxchg.com:7051
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.market.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/tls/ca.crt            
     volumes:
       - ./crypto-config/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/msp:/etc/hyperledger/msp/peer
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     ports:
       - 12051:7051
       - 12053:7053
@@ -138,8 +187,12 @@ services:
       - CORE_PEER_ADDRESS=peer0.org1.artxchg.com:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.artxchg.com/msp
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org1.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer0.org1.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg.com:/etc/hyperledger/msp
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     depends_on:
       - orderer.artxchg.com
       - peer0.org1.artxchg.com
@@ -156,8 +209,12 @@ services:
       - CORE_PEER_ADDRESS=peer1.org1.artxchg.com:7051
       - CORE_PEER_LOCALMSPID=Org1MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.artxchg.com/msp
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org1.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.artxchg.com/peers/peer1.org1.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg.com:/etc/hyperledger/msp
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     depends_on:
       - orderer.artxchg.com
       - peer1.org1.artxchg.com
@@ -174,8 +231,12 @@ services:
       - CORE_PEER_ADDRESS=peer0.org2.artxchg.com:7051
       - CORE_PEER_LOCALMSPID=Org2MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.artxchg.com/msp
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org2.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer0.org2.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg.com:/etc/hyperledger/msp
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     depends_on:
       - orderer.artxchg.com
       - peer0.org2.artxchg.com
@@ -192,8 +253,12 @@ services:
       - CORE_PEER_ADDRESS=peer1.org2.artxchg.com:7051
       - CORE_PEER_LOCALMSPID=Org2MSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.artxchg.com/msp
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.org2.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.artxchg.com/peers/peer1.org2.artxchg.com/tls/ca.crt
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg.com:/etc/hyperledger/msp
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     depends_on:
       - orderer.artxchg.com
       - peer1.org2.artxchg.com
@@ -210,8 +275,12 @@ services:
       - CORE_PEER_ADDRESS=peer0.market.artxchg.com:7051
       - CORE_PEER_LOCALMSPID=ArtMarketMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@market.artxchg.com/msp
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.market.artxchg.com:7052
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/tls/ca.crt                  
     volumes:
       - ./crypto-config/peerOrganizations/market.artxchg.com:/etc/hyperledger/msp
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     depends_on:
       - peer0.market.artxchg.com
     networks:

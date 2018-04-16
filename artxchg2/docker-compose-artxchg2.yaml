@@ -1,0 +1,272 @@
+version: '2'
+
+networks:
+  # network name
+  artxchg2:
+
+services:
+  orderer.artxchg2.com:
+    # name of service which will serve as an orderer in the fabric network
+    image: hyperledger/fabric-orderer:x86_64-1.0.0
+    # container name for the image ‘hyperledger/fabric-orderer’ which will have its instance in the docker container
+    container_name: orderer.artxchg2.com
+    environment:
+      # listening address for the orderer
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      # tells about the genesis block of this blockchain contains its information within a file
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      # location of  the genesis block info file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      # id of the msp (Membership Service Provider) defined in the ‘cypto-config.yaml’ (which will be defined later) for Orderer in the fabric network
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      # directory location for the msp directory
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # enable the ‘Transport Layer Security’ for communicating with the orderer in the fabric network
+      - ORDERER_GENERAL_TLS_ENABLED=false
+    volumes:
+      # mapping the directories that are being used in the environment configurations
+      - ./orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ./crypto-config/ordererOrganizations/artxchg2.com/orderers/orderer.artxchg2.com/msp:/var/hyperledger/orderer/msp
+    command: orderer
+    # to start the orderer in the docker
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    # sets the working directory for the orderer
+    ports:
+      # mapping the ports used by the docker internally
+      - 7050:7050
+    networks:
+      # # network name
+      - artxchg2
+
+  peer0.org1.artxchg2.com:
+    container_name: peer0.org1.artxchg2.com
+    extends:
+      file: ./peer.yaml
+      service: peer
+    environment:
+      - CORE_PEER_ID=peer0.org1.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.org1.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.artxchg2.com:7051
+    volumes:
+      - ./crypto-config/peerOrganizations/org1.artxchg2.com/peers/peer0.org1.artxchg2.com/msp:/etc/hyperledger/msp/peer
+    ports:
+      - 8051:7051
+      - 8053:7053
+    depends_on:
+      - orderer.artxchg2.com
+    networks:
+      - artxchg2
+
+  peer1.org1.artxchg2.com:
+    container_name: peer1.org1.artxchg2.com
+    extends:
+      file: ./peer.yaml
+      service: peer
+    environment:
+      - CORE_PEER_ID=peer1.org1.artxchg2.com
+      - CORE_PEER_ADDRESS=peer1.org1.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.artxchg2.com:7051
+    volumes:
+      - ./crypto-config/peerOrganizations/org1.artxchg2.com/peers/peer1.org1.artxchg2.com/msp:/etc/hyperledger/msp/peer
+    ports:
+      - 9051:7051
+      - 9053:7053
+    depends_on:
+      - orderer.artxchg2.com
+    networks:
+      - artxchg2
+
+  peer0.org2.artxchg2.com:
+    container_name: peer0.org2.artxchg2.com
+    extends:
+      file: ./peer.yaml
+      service: peer
+    environment:
+      - CORE_PEER_ID=peer0.org2.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.org2.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.artxchg2.com:7051
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.artxchg2.com/peers/peer0.org2.artxchg2.com/msp:/etc/hyperledger/msp/peer
+    ports:
+      - 10051:7051
+      - 10053:7053
+    depends_on:
+      - orderer.artxchg2.com
+    networks:
+      - artxchg2
+
+  peer1.org2.artxchg2.com:
+    container_name: peer1.org2.artxchg2.com
+    extends:
+      file: ./peer.yaml
+      service: peer
+    environment:
+      - CORE_PEER_ID=peer1.org2.artxchg2.com
+      - CORE_PEER_ADDRESS=peer1.org2.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.artxchg2.com:7051
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.artxchg2.com/peers/peer1.org2.artxchg2.com/msp:/etc/hyperledger/msp/peer
+    ports:
+      - 11051:7051
+      - 11053:7053
+    depends_on:
+      - orderer.artxchg2.com
+    networks:
+      - artxchg2
+
+  peer0.org3.artxchg2.com:
+    container_name: peer0.org3.artxchg2.com
+    extends:
+      file: ./peer.yaml
+      service: peer
+    environment:
+      - CORE_PEER_ID=peer0.org3.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.org3.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org3MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.artxchg2.com:7051
+    volumes:
+      - ./crypto-config/peerOrganizations/org3.artxchg2.com/peers/peer0.org3.artxchg2.com/msp:/etc/hyperledger/msp/peer
+    ports:
+      - 12051:7051
+      - 12053:7053
+    depends_on:
+      - orderer.artxchg2.com
+    networks:
+      - artxchg2
+
+  peer0.market.artxchg2.com:
+    container_name: peer0.market.artxchg2.com
+    extends:
+      file: ./peer.yaml
+      service: peer
+    environment:
+      - CORE_PEER_ID=peer0.market.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.market.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=ArtMarketMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.market.artxchg2.com:7051
+    volumes:
+      - ./crypto-config/peerOrganizations/market.artxchg2.com/peers/peer0.market.artxchg2.com/msp:/etc/hyperledger/msp/peer
+    ports:
+      - 13051:7051
+      - 13053:7053
+    depends_on:
+      - orderer.artxchg2.com
+    networks:
+      - artxchg2
+
+  cli0.Org1:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli0.Org1
+    environment:
+      - CORE_PEER_ID=cli0.org1.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.org1.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.artxchg2.com/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org1.artxchg2.com:/etc/hyperledger/msp
+    depends_on:
+      - orderer.artxchg2.com
+      - peer0.org1.artxchg2.com
+    networks:
+      - artxchg2
+
+  cli1.Org1:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli1.Org1
+    environment:
+      - CORE_PEER_ID=cli1.org1.artxchg2.com
+      - CORE_PEER_ADDRESS=peer1.org1.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.artxchg2.com/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org1.artxchg2.com:/etc/hyperledger/msp
+    depends_on:
+      - orderer.artxchg2.com
+      - peer1.org1.artxchg2.com
+    networks:
+      - artxchg2
+
+  cli0.Org2:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli0.Org2
+    environment:
+      - CORE_PEER_ID=cli0.org2.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.org2.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.artxchg2.com/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.artxchg2.com:/etc/hyperledger/msp
+    depends_on:
+      - orderer.artxchg2.com
+      - peer0.org2.artxchg2.com
+    networks:
+      - artxchg2
+
+  cli1.Org2:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli1.Org2
+    environment:
+      - CORE_PEER_ID=cli1.org2.artxchg2.com
+      - CORE_PEER_ADDRESS=peer1.org2.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.artxchg2.com/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.artxchg2.com:/etc/hyperledger/msp
+    depends_on:
+      - orderer.artxchg2.com
+      - peer1.org2.artxchg2.com
+    networks:
+      - artxchg2
+
+  cli0.Org3:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli0.Org3
+    environment:
+      - CORE_PEER_ID=cli0.org3.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.org3.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=Org3MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org3.artxchg2.com/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org3.artxchg2.com:/etc/hyperledger/msp
+    depends_on:
+      - orderer.artxchg2.com
+      - peer0.org3.artxchg2.com
+    networks:
+      - artxchg2
+
+  cli.ArtMarket:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.ArtMarket
+    environment:
+      - CORE_PEER_ID=cli.market.artxchg2.com
+      - CORE_PEER_ADDRESS=peer0.market.artxchg2.com:7051
+      - CORE_PEER_LOCALMSPID=ArtMarketMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@market.artxchg2.com/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/market.artxchg2.com:/etc/hyperledger/msp
+    depends_on:
+      - peer0.market.artxchg2.com
+    networks:
+      - artxchg2
