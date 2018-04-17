@@ -1,0 +1,4 @@
+Q1. Use configtxlator to update the channel configuration. How does it work, 
+    how can you join Org3 to existing channel?
+
+ 
