@@ -25,7 +25,8 @@ services:
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-      - ORDERER_GENERAL_TLS_ROOTCAS=/var/hyperledger/orderer/tls/ca.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - CORE_LOGGING_GRPC=DEBUG
     volumes:
       # mapping the directories that are being used in the environment configurations
       - ./orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
@@ -277,7 +278,8 @@ services:
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@market.artxchg.com/msp
       - CORE_PEER_CHAINCODELISTENADDRESS=peer0.market.artxchg.com:7052
       - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/tls/ca.crt                  
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/market.artxchg.com/peers/peer0.market.artxchg.com/tls/ca.crt
+      - CORE_LOGGING_GRPC=DEBUG
     volumes:
       - ./crypto-config/peerOrganizations/market.artxchg.com:/etc/hyperledger/msp
       - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
