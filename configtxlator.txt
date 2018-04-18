@@ -1,4 +1,42 @@
 Q1. Use configtxlator to update the channel configuration. How does it work, 
     how can you join Org3 to existing channel?
 
- 
+Run configtxlator:
+	export PATH=/home/adam/hlf/FabricBinaries/bin:$PATH
+	configtxlator start &
+
+Fetch current setup:
+	docker exec cli.ArtMarket bash -c 'peer channel fetch config ./channels/config_block.pb -c org1 -o orderer.artxchg2.com:7050'
+	mv channels/config_block.pb ./config_block.pb
+
+Translate it from PB to JSON:
+	curl -X POST --data-binary @config_block.pb http://127.0.0.1:7059/protolator/decode/common.Block > config_block.json
+
+Strip headers:
+	jq .data.data[0].payload.data.config config_block.json > config.json
+
+Create updated setup:
+	cp config.json config2.json
+	vim config2.json
+
+Encode original config to PB:
+	curl -X POST --data-binary @config.json http://127.0.0.1:7059/protolator/encode/common.Config > config.pb
+
+Encode updated config to PB:
+	curl -X POST --data-binary @config2.json http://127.0.0.1:7059/protolator/encode/common.Config > config2.pb
+
+Create delta update:
+	curl -X POST -F original=@config.pb -F updated=@config2.pb http://127.0.0.1:7059/configtxlator/compute/update-from-configs -F channel=org1 > config_update.pb
+
+Translate delta update from PB to JSON:
+	curl -X POST --data-binary @config_update.pb http://127.0.0.1:7059/protolator/decode/common.ConfigUpdate > config_update.json
+
+Wrap it into headers envelope:
+	echo '{"payload":{"header":{"channel_header":{"channel_id":"org1", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' > config_update_as_envelope.json
+
+Translate it back to PB:
+	curl -X POST --data-binary @config_update_as_envelope.json http://127.0.0.1:7059/protolator/encode/common.Envelope > config_update_as_envelope.pb
+
+Update channel configuration:
+	mv config_update_as_envelope.pb channels/config_update_as_envelope.pb
+	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update_as_envelope.pb -o orderer.artxchg2.com:7050 -c org1'

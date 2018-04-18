@@ -50,7 +50,7 @@ const sendOrderer = function(channel, request) {
 const target = [];
 
 // Function invokes createPC on pcxchg
-function invoke(opt, param) {
+function invokeCh(opt, param) {
   const client = new hfc();
   return enrolUser(client, opt)
     .then(user => {
@@ -79,6 +79,51 @@ function invoke(opt, param) {
       } else {
         throw "Response is bad";
       }
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+};
+
+// Function joins the channel
+function joinCh(opt, param) {
+  const client = new hfc();
+  return enrolUser(client, opt)
+    .then(user => {
+      if(typeof user === "undefined" || !user.isEnrolled())
+        throw "User not enrolled";
+
+      var tx_id;
+      var genesis_block;
+      var targets;
+      channel = initNetwork(client, opt, target);
+
+      tx_id = client.newTransactionID();
+      let g_request = {
+        txId :     tx_id
+      };
+
+      // get the genesis block from the orderer
+      channel.getGenesisBlock(g_request).then((block) => {
+        genesis_block = block;
+        tx_id = client.newTransactionID();
+        let j_request = {
+          targets : targets,
+          block : genesis_block,
+          txId :     tx_id
+        };
+
+        // send genesis block to the peer
+        return channel.joinChannel(j_request);  
+
+      }).then((results) => {
+        if(results && results.response && results.response.status == 200) {
+          throw "Response is GOOD";
+        } else {
+          throw "Response is Bad";
+        }
+      });
     })
     .catch(err => {
       console.log(err);
@@ -116,8 +161,18 @@ app.set('views', __dirname);
 
 app.post('/invoke', function(req, res, next) {
   const args = req.body.args;
-  invoke(options[args[0]], args.slice(1))
+  invokeCh(options[args[0]], args.slice(1))
     .then(() => res.send("Chaincode invoked"))
+    .catch(err => {
+      res.status(500);
+      res.send(err.toString());
+    });
+});
+
+app.post('/join', function(req, res, next) {
+  const args = req.body.args;
+  joinCh(options[args[0]], args.slice(1))
+    .then(() => res.send("Channel Joined"))
     .catch(err => {
       res.status(500);
       res.send(err.toString());
