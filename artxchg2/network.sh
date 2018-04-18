@@ -6,6 +6,8 @@ docker exec cli.ArtMarket bash -c 'peer channel join -b org2.block'
 
 docker exec cli0.Org1 bash -c 'peer channel join -b org1.block'
 docker exec cli0.Org2 bash -c 'peer channel join -b org2.block'
+docker exec cli1.Org1 bash -c 'peer channel join -b org1.block'
+docker exec cli1.Org2 bash -c 'peer channel join -b org2.block'
 docker exec cli0.Org3 bash -c 'peer channel join -b org2.block'
 
 docker exec cli0.Org1 bash -c 'peer channel update -o orderer.artxchg2.com:7050 -c org1 -f ./channels/org1anchor.tx'
