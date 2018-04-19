@@ -130,6 +130,8 @@ services:
       - kafka1
       - kafka2
       - kafka3
+    ports:
+      - 7050:7050
     networks:
       - artxchg2
 
@@ -148,6 +150,8 @@ services:
       - kafka1
       - kafka2
       - kafka3
+    ports:
+      - 8050:7050
     networks:
       - artxchg2
 
@@ -166,6 +170,8 @@ services:
       - kafka1
       - kafka2
       - kafka3
+    ports:
+      - 9050:7050
     networks:
       - artxchg2
 
