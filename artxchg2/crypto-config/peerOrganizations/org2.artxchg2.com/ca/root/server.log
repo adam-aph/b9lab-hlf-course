@@ -1,0 +1,399 @@
+2018/04/19 15:16:46 [INFO] Created default configuration file at /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root/fabric-ca-server-config.yaml
+2018/04/19 15:16:46 [INFO] Starting server in home directory: /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root
+2018/04/19 15:16:46 [DEBUG] CA Home Directory: /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root
+2018/04/19 15:16:46 [DEBUG] Making server filenames absolute
+2018/04/19 15:16:46 [DEBUG] Initializing default CA in directory /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root
+2018/04/19 15:16:46 [DEBUG] Init CA with home /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root and config {CA:{Name: Keyfile:ca-key.pem Certfile:ca-cert.pem Chainfile:ca-chain.pem} Signing:0xc42026fd40 CSR:{CN:fabric-ca-server Names:[{C:US ST:North Carolina L: O:Hyperledger OU:Fabric SerialNumber:}] Hosts:[adam-VirtualBox localhost] KeyRequest:<nil> CA:0xc42024fca0 SerialNumber:} Registry:{MaxEnrollments:-1 Identities:[{ Name:**** Pass:**** Type:client Affiliation: MaxEnrollments:0 Attrs:map[hf.Registrar.Roles:client,user,peer,validator,auditor hf.Registrar.DelegateRoles:client,user,validator,auditor hf.Revoker:1 hf.IntermediateCA:1]  }]} Affiliations:map[org2:[department1] org1:[department1 department2]] LDAP:{ Enabled:false URL:ldap://****:****@<host>:<port>/<base> UserFilter:(uid=%s) GroupFilter:(memberUid=%s) TLS:{false [ldap-server-cert.pem] {ldap-client-key.pem ldap-client-cert.pem}}  } DB:{ Type:sqlite3 Datasource:fabric-ca-server.db TLS:{false [db-server-cert.pem] {db-client-key.pem db-client-cert.pem}}  } CSP:0xc420272040 Client:<nil> Intermediate:{ParentServer:{URL: CAName:} TLS:{Enabled:false CertFiles:[] Client:{KeyFile: CertFile:}} Enrollment:{Name: Secret: Profile: Label: CSR:<nil> CAName:}}}
+2018/04/19 15:16:46 [DEBUG] CA Home Directory: /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root
+2018/04/19 15:16:46 [DEBUG] Initializing BCCSP: &{ProviderName:SW SwOpts:0xc42026c480 Pkcs11Opts:<nil>}
+2018/04/19 15:16:46 [DEBUG] Initializing BCCSP with software options &{SecLevel:256 HashFamily:SHA2 Ephemeral:false FileKeystore:0xc42026f630 DummyKeystore:<nil>}
+2018/04/19 15:16:46 [DEBUG] Initialize key material
+2018/04/19 15:16:46 [DEBUG] Making CA filenames absolute
+2018/04/19 15:16:46 [DEBUG] Getting CA cert; parent server URL is ''
+2018/04/19 15:16:46 [DEBUG] Root CA certificate request: {CN:fabric-ca-server Names:[{C:US ST:North Carolina L: O:Hyperledger OU:Fabric SerialNumber:}] Hosts:[adam-VirtualBox localhost] KeyRequest:0xc420273de0 CA:0xc42024fca0 SerialNumber:}
+2018/04/19 15:16:46 [INFO] generating key: &{A:ecdsa S:256}
+2018/04/19 15:16:46 [DEBUG] generate key from request: algo=ecdsa, size=256
+2018/04/19 15:16:46 [INFO] encoded CSR
+2018/04/19 15:16:46 [DEBUG] validating configuration
+2018/04/19 15:16:46 [DEBUG] validate local profile
+2018/04/19 15:16:46 [DEBUG] profile is valid
+2018/04/19 15:16:46 [INFO] signed certificate with serial number 68850419812326871356807608238456510700547152838
+2018/04/19 15:16:46 [INFO] The CA key and certificate were generated for CA 
+2018/04/19 15:16:46 [INFO] The key was stored by BCCSP provider 'SW'
+2018/04/19 15:16:46 [INFO] The certificate is at: /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root/ca-cert.pem
+2018/04/19 15:16:46 [DEBUG] Initializing DB
+2018/04/19 15:16:46 [DEBUG] Using sqlite database, connect to database in home (/home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root/fabric-ca-server.db) directory
+2018/04/19 15:16:46 [DEBUG] Creating SQLite database (/home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root/fabric-ca-server.db) if it does not exist...
+2018/04/19 15:16:46 [DEBUG] Creating users table if it does not exist
+2018/04/19 15:16:46 [DEBUG] Creating affiliations table if it does not exist
+2018/04/19 15:16:46 [DEBUG] Creating certificates table if it does not exist
+2018/04/19 15:16:46 [DEBUG] Successfully opened sqlite3 DB
+2018/04/19 15:16:46 [DEBUG] Initializing identity registry
+2018/04/19 15:16:46 [DEBUG] Loading identity table
+2018/04/19 15:16:46 [DEBUG] Loading identity 'admin'
+2018/04/19 15:16:46 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:46 [DEBUG] Max enrollment value verification - User specified max enrollment: 0, CA max enrollment: -1
+2018/04/19 15:16:46 [DEBUG] DB: Add identity admin
+2018/04/19 15:16:46 [DEBUG] Successfully added identity admin to the database
+2018/04/19 15:16:46 [DEBUG] Registered identity: { Name:**** Pass:**** Type:client Affiliation: MaxEnrollments:-1 Attrs:map[hf.Revoker:1 hf.IntermediateCA:1 hf.Registrar.Roles:client,user,peer,validator,auditor hf.Registrar.DelegateRoles:client,user,validator,auditor]  }
+2018/04/19 15:16:46 [DEBUG] Successfully loaded identity table
+2018/04/19 15:16:46 [DEBUG] Initialized DB identity registry
+2018/04/19 15:16:46 [DEBUG] Loading affiliations table
+2018/04/19 15:16:46 [DEBUG] DB: Add affiliation org2
+2018/04/19 15:16:46 [DEBUG] Affiliation 'org2' added
+2018/04/19 15:16:46 [DEBUG] DB: Add affiliation org2.department1
+2018/04/19 15:16:46 [DEBUG] Affiliation 'org2.department1' added
+2018/04/19 15:16:46 [DEBUG] DB: Add affiliation org1
+2018/04/19 15:16:46 [DEBUG] Affiliation 'org1' added
+2018/04/19 15:16:46 [DEBUG] DB: Add affiliation org1.department1
+2018/04/19 15:16:46 [DEBUG] Affiliation 'org1.department1' added
+2018/04/19 15:16:46 [DEBUG] DB: Add affiliation org1.department2
+2018/04/19 15:16:46 [DEBUG] Affiliation 'org1.department2' added
+2018/04/19 15:16:46 [DEBUG] Successfully loaded affiliations table
+2018/04/19 15:16:46 [INFO] Initialized sqlite3 database at /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root/fabric-ca-server.db
+2018/04/19 15:16:46 [DEBUG] Initializing enrollment signer
+2018/04/19 15:16:46 [DEBUG] validating configuration
+2018/04/19 15:16:46 [DEBUG] validate local profile
+2018/04/19 15:16:46 [DEBUG] profile is valid
+2018/04/19 15:16:46 [DEBUG] validate local profile
+2018/04/19 15:16:46 [DEBUG] profile is valid
+2018/04/19 15:16:46 [DEBUG] CA initialization successful
+2018/04/19 15:16:46 [INFO] Home directory for default CA: /home/adam/hlf/adam-h-code/artxchg2/crypto-config/peerOrganizations/org2.artxchg2.com/ca/root
+2018/04/19 15:16:46 [DEBUG] 1 CA instance(s) running on server
+2018/04/19 15:16:46 [INFO] Listening on http://0.0.0.0:7104
+2018/04/19 15:16:47 [DEBUG] Received request
+POST /enroll
+Authorization: Basic YWRtaW46YWRtaW5wdw==
+{"hosts":["root","root"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBQDCB5wIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV\nBAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE9a4M5PZ5+b1ufl+r\nsHY5hmrWK29lNblHoPDDqZOxXEQ5r3rc3dBzzw2IfoIagLJCIBOm8e0zNyb4rqH5\nr8JVgaAoMCYGCSqGSIb3DQEJDjEZMBcwFQYDVR0RBA4wDIIEcm9vdIIEcm9vdDAK\nBggqhkjOPQQDAgNIADBFAiEA57LNklUOEcPKzUmeQBIycoYMxJlscrYJQECUBps0\nWcACICcaRVx3ebzNdndbMBtD9i3zjzBHrdsYDk1vyXg+UQIU\n-----END CERTIFICATE REQUEST-----\n","profile":"tls","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:47 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:47 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:47 [DEBUG] DB: Login user admin with max enrollments of -1 and state of 0
+2018/04/19 15:16:47 [DEBUG] Successfully incremented state for identity admin to 1
+2018/04/19 15:16:47 [DEBUG] DB: identity admin successfully logged in
+2018/04/19 15:16:47 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:47 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:47 [DEBUG] Enrollment request: {SignRequest:{Hosts:[root root] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBQDCB5wIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV
+BAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE9a4M5PZ5+b1ufl+r
+sHY5hmrWK29lNblHoPDDqZOxXEQ5r3rc3dBzzw2IfoIagLJCIBOm8e0zNyb4rqH5
+r8JVgaAoMCYGCSqGSIb3DQEJDjEZMBcwFQYDVR0RBA4wDIIEcm9vdIIEcm9vdDAK
+BggqhkjOPQQDAgNIADBFAiEA57LNklUOEcPKzUmeQBIycoYMxJlscrYJQECUBps0
+WcACICcaRVx3ebzNdndbMBtD9i3zjzBHrdsYDk1vyXg+UQIU
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile:tls CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:47 [DEBUG] csrAuthCheck: enrollment ID=admin, CommonName=admin, Subject=<nil>
+2018/04/19 15:16:47 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:47 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:47 [INFO] signed certificate with serial number 1215567382862611783654702216307256621439474326
+2018/04/19 15:16:47 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:47 [DEBUG] Saved serial number as hex 3682077a9f8d82a093f11ad17f72f04ce95a96
+2018/04/19 15:16:47 [DEBUG] saved certificate with serial number 1215567382862611783654702216307256621439474326
+2018/04/19 15:16:47 [INFO] 127.0.0.1:43204 - "POST /enroll" 200
+2018/04/19 15:16:47 [DEBUG] Received request
+POST /enroll
+Authorization: Basic YWRtaW46YWRtaW5wdw==
+{"hosts":["adam-VirtualBox"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBRTCB7AIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV\nBAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE51VlBNsk5+O0Us18\nsHrJtppca14mkDpW6tg8z4huYE8WI/2g442cZz0NOJvAPD+O4UcW8iQmXKEEGPyR\nshmfM6AtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0RBBMwEYIPYWRhbS1WaXJ0dWFs\nQm94MAoGCCqGSM49BAMCA0gAMEUCIQDqJSxpnblAV82XMXgF6pxEEUPH5bwj8MG7\nCb/iKSRQnQIgInCcpwJ/vKcXzqHI2pOLmSon7KI4lrozlNSpWBsC+Rs=\n-----END CERTIFICATE REQUEST-----\n","profile":"","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:47 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:47 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:47 [DEBUG] DB: Login user admin with max enrollments of -1 and state of 1
+2018/04/19 15:16:47 [DEBUG] Successfully incremented state for identity admin to 2
+2018/04/19 15:16:47 [DEBUG] DB: identity admin successfully logged in
+2018/04/19 15:16:47 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:47 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:47 [DEBUG] Enrollment request: {SignRequest:{Hosts:[adam-VirtualBox] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBRTCB7AIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV
+BAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE51VlBNsk5+O0Us18
+sHrJtppca14mkDpW6tg8z4huYE8WI/2g442cZz0NOJvAPD+O4UcW8iQmXKEEGPyR
+shmfM6AtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0RBBMwEYIPYWRhbS1WaXJ0dWFs
+Qm94MAoGCCqGSM49BAMCA0gAMEUCIQDqJSxpnblAV82XMXgF6pxEEUPH5bwj8MG7
+Cb/iKSRQnQIgInCcpwJ/vKcXzqHI2pOLmSon7KI4lrozlNSpWBsC+Rs=
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile: CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:47 [DEBUG] csrAuthCheck: enrollment ID=admin, CommonName=admin, Subject=<nil>
+2018/04/19 15:16:47 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:47 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:47 [INFO] signed certificate with serial number 50232801490201849608058293122484686398832990067
+2018/04/19 15:16:47 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:47 [DEBUG] Saved serial number as hex 8cc8447f1bbf35dcdb8fb479e55632182af5773
+2018/04/19 15:16:47 [DEBUG] saved certificate with serial number 50232801490201849608058293122484686398832990067
+2018/04/19 15:16:47 [INFO] 127.0.0.1:43206 - "POST /enroll" 200
+2018/04/19 15:16:47 [DEBUG] Received request
+POST /register
+Authorization: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNRekNDQWVtZ0F3SUJBZ0lVQ015RVIvRzc4MTNOdVB0SG5sVmpJWUt2VjNNd0NnWUlLb1pJemowRUF3SXcKYURFTE1Ba0dBMVVFQmhNQ1ZWTXhGekFWQmdOVkJBZ1REazV2Y25Sb0lFTmhjbTlzYVc1aE1SUXdFZ1lEVlFRSwpFd3RJZVhCbGNteGxaR2RsY2pFUE1BMEdBMVVFQ3hNR1JtRmljbWxqTVJrd0Z3WURWUVFERXhCbVlXSnlhV010ClkyRXRjMlZ5ZG1WeU1CNFhEVEU0TURReE9URXpNVEl3TUZvWERURTVNRFF4T1RFek1USXdNRm93WFRFTE1Ba0cKQTFVRUJoTUNWVk14RnpBVkJnTlZCQWdURGs1dmNuUm9JRU5oY205c2FXNWhNUlF3RWdZRFZRUUtFd3RJZVhCbApjbXhsWkdkbGNqRVBNQTBHQTFVRUN4TUdSbUZpY21sak1RNHdEQVlEVlFRREV3VmhaRzFwYmpCWk1CTUdCeXFHClNNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJPZFZaUVRiSk9manRGTE5mTEI2eWJhYVhHdGVKcEE2VnVyWVBNK0kKYm1CUEZpUDlvT09ObkdjOURUaWJ3RHcvanVGSEZ2SWtKbHloQkJqOGtiSVpuek9qZkRCNk1BNEdBMVVkRHdFQgovd1FFQXdJSGdEQU1CZ05WSFJNQkFmOEVBakFBTUIwR0ExVWREZ1FXQkJSSTBUL3poOElNTlpmcW5sYlYrNGExCk5STUViekFmQmdOVkhTTUVHREFXZ0JSUkxrNm9kWkVLZmJRSlo1dG1TS1lsTjlkR21UQWFCZ05WSFJFRUV6QVIKZ2c5aFpHRnRMVlpwY25SMVlXeENiM2d3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUloQU9pWk5meFdUMThhd2lQegpYS3FiTWY3dWYrSmVGNmNER2JaellHZ1F6THJOQWlBdzBMczFLOS8xWWNUbm1zM2JTTUVQWGtlcExWY054bENkCmhPRk9KZmRKdWc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==.MEUCIQDnL+31cH9pLnxVHb0OqepeOHHAIadKxvDKBtI+Cf/DoQIgEgcydAC2NGTtUi6ZVw5Ha/aEjMv3/NMmvzKrbgHNSC0=
+{"id":"nodeAdmin","type":"user","secret":"secret","max_enrollments":-1,"affiliation":"org1","attrs":[{"name":"","value":""}]}
+2018/04/19 15:16:47 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:47 [DEBUG] Checking for revocation/expiration of certificate owned by 'admin'
+2018/04/19 15:16:47 [DEBUG] DB: Get certificate by serial (8cc8447f1bbf35dcdb8fb479e55632182af5773) and aki (512e4ea875910a7db409679b6648a62537d74699)
+2018/04/19 15:16:47 [DEBUG] Successful authentication of 'admin'
+2018/04/19 15:16:47 [DEBUG] Register request received
+2018/04/19 15:16:47 [DEBUG] Received registration request from admin: &{RegistrationRequest:{Name:nodeAdmin Type:user Secret:<<user-specified>> MaxEnrollments:-1 Affiliation:org1 Attributes:[{Name: Value:}] CAName:}}
+2018/04/19 15:16:47 [DEBUG] canRegister - Check to see if user admin can register
+2018/04/19 15:16:47 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:47 [DEBUG] Validate ID
+2018/04/19 15:16:47 [DEBUG] An affiliation is required for identity type user
+2018/04/19 15:16:47 [DEBUG] Validating affiliation: org1
+2018/04/19 15:16:47 [DEBUG] DB: Get affiliation org1
+2018/04/19 15:16:47 [DEBUG] Registering user id: nodeAdmin
+2018/04/19 15:16:47 [DEBUG] Max enrollment value verification - User specified max enrollment: -1, CA max enrollment: -1
+2018/04/19 15:16:47 [DEBUG] DB: Getting identity nodeAdmin
+2018/04/19 15:16:47 [DEBUG] DB: Add identity nodeAdmin
+2018/04/19 15:16:47 [DEBUG] Successfully added identity nodeAdmin to the database
+2018/04/19 15:16:47 [DEBUG] Registration completed - sending response 0xc42000e6f8
+2018/04/19 15:16:47 [INFO] 127.0.0.1:43208 - "POST /register" 200
+2018/04/19 15:16:48 [DEBUG] Received request
+POST /enroll
+Authorization: Basic bm9kZUFkbWluOnNlY3JldA==
+{"hosts":["adam-VirtualBox"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBSDCB8AIBADBhMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxEjAQBgNV\nBAMTCW5vZGVBZG1pbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOHfoF8Ref8b\nYeA46lFdcpeb1ebO2vK3wg8MahIMITVzH7PluoWmfQiY7fsQOXgsE8V9tYBoPICg\ng7+9VQrTrBWgLTArBgkqhkiG9w0BCQ4xHjAcMBoGA1UdEQQTMBGCD2FkYW0tVmly\ndHVhbEJveDAKBggqhkjOPQQDAgNHADBEAiAC1nbWGl+TAM3uM2qW+om4N620x3HN\nwUkX69vWF/6WMgIgXDGaIvFnBPe5m6u15uwLr8mNZtAXDZ7zUCX6ALuG4/c=\n-----END CERTIFICATE REQUEST-----\n","profile":"","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:48 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:48 [DEBUG] DB: Getting identity nodeAdmin
+2018/04/19 15:16:48 [DEBUG] DB: Login user nodeAdmin with max enrollments of -1 and state of 0
+2018/04/19 15:16:48 [DEBUG] Successfully incremented state for identity nodeAdmin to 1
+2018/04/19 15:16:48 [DEBUG] DB: identity nodeAdmin successfully logged in
+2018/04/19 15:16:48 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:48 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:48 [DEBUG] Enrollment request: {SignRequest:{Hosts:[adam-VirtualBox] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBSDCB8AIBADBhMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxEjAQBgNV
+BAMTCW5vZGVBZG1pbjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOHfoF8Ref8b
+YeA46lFdcpeb1ebO2vK3wg8MahIMITVzH7PluoWmfQiY7fsQOXgsE8V9tYBoPICg
+g7+9VQrTrBWgLTArBgkqhkiG9w0BCQ4xHjAcMBoGA1UdEQQTMBGCD2FkYW0tVmly
+dHVhbEJveDAKBggqhkjOPQQDAgNHADBEAiAC1nbWGl+TAM3uM2qW+om4N620x3HN
+wUkX69vWF/6WMgIgXDGaIvFnBPe5m6u15uwLr8mNZtAXDZ7zUCX6ALuG4/c=
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile: CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:48 [DEBUG] csrAuthCheck: enrollment ID=nodeAdmin, CommonName=nodeAdmin, Subject=<nil>
+2018/04/19 15:16:48 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:48 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:48 [INFO] signed certificate with serial number 586440197428913014838382664338927896316894376887
+2018/04/19 15:16:48 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:48 [DEBUG] Saved serial number as hex 66b8e34fee969b0d9f94157010ec61e453e9f3b7
+2018/04/19 15:16:48 [DEBUG] saved certificate with serial number 586440197428913014838382664338927896316894376887
+2018/04/19 15:16:48 [INFO] 127.0.0.1:43210 - "POST /enroll" 200
+2018/04/19 15:16:48 [DEBUG] Received request
+POST /register
+Authorization: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNRekNDQWVtZ0F3SUJBZ0lVQ015RVIvRzc4MTNOdVB0SG5sVmpJWUt2VjNNd0NnWUlLb1pJemowRUF3SXcKYURFTE1Ba0dBMVVFQmhNQ1ZWTXhGekFWQmdOVkJBZ1REazV2Y25Sb0lFTmhjbTlzYVc1aE1SUXdFZ1lEVlFRSwpFd3RJZVhCbGNteGxaR2RsY2pFUE1BMEdBMVVFQ3hNR1JtRmljbWxqTVJrd0Z3WURWUVFERXhCbVlXSnlhV010ClkyRXRjMlZ5ZG1WeU1CNFhEVEU0TURReE9URXpNVEl3TUZvWERURTVNRFF4T1RFek1USXdNRm93WFRFTE1Ba0cKQTFVRUJoTUNWVk14RnpBVkJnTlZCQWdURGs1dmNuUm9JRU5oY205c2FXNWhNUlF3RWdZRFZRUUtFd3RJZVhCbApjbXhsWkdkbGNqRVBNQTBHQTFVRUN4TUdSbUZpY21sak1RNHdEQVlEVlFRREV3VmhaRzFwYmpCWk1CTUdCeXFHClNNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJPZFZaUVRiSk9manRGTE5mTEI2eWJhYVhHdGVKcEE2VnVyWVBNK0kKYm1CUEZpUDlvT09ObkdjOURUaWJ3RHcvanVGSEZ2SWtKbHloQkJqOGtiSVpuek9qZkRCNk1BNEdBMVVkRHdFQgovd1FFQXdJSGdEQU1CZ05WSFJNQkFmOEVBakFBTUIwR0ExVWREZ1FXQkJSSTBUL3poOElNTlpmcW5sYlYrNGExCk5STUViekFmQmdOVkhTTUVHREFXZ0JSUkxrNm9kWkVLZmJRSlo1dG1TS1lsTjlkR21UQWFCZ05WSFJFRUV6QVIKZ2c5aFpHRnRMVlpwY25SMVlXeENiM2d3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUloQU9pWk5meFdUMThhd2lQegpYS3FiTWY3dWYrSmVGNmNER2JaellHZ1F6THJOQWlBdzBMczFLOS8xWWNUbm1zM2JTTUVQWGtlcExWY054bENkCmhPRk9KZmRKdWc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==.MEUCIQDaA4WHo2Ptke/XMvdhbtGZAqQ9uB6oE2jSkKhe/tORzgIgVIrXL+2gPYR9nPtX6DE7jRhDZK7jDTPfQUj8uVSyhT4=
+{"id":"User1@org2.artxchg2.com","type":"user","secret":"secret","max_enrollments":-1,"affiliation":"org1","attrs":[{"name":"","value":""}]}
+2018/04/19 15:16:48 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:48 [DEBUG] Checking for revocation/expiration of certificate owned by 'admin'
+2018/04/19 15:16:48 [DEBUG] DB: Get certificate by serial (8cc8447f1bbf35dcdb8fb479e55632182af5773) and aki (512e4ea875910a7db409679b6648a62537d74699)
+2018/04/19 15:16:48 [DEBUG] Successful authentication of 'admin'
+2018/04/19 15:16:48 [DEBUG] Register request received
+2018/04/19 15:16:48 [DEBUG] Received registration request from admin: &{RegistrationRequest:{Name:User1@org2.artxchg2.com Type:user Secret:<<user-specified>> MaxEnrollments:-1 Affiliation:org1 Attributes:[{Name: Value:}] CAName:}}
+2018/04/19 15:16:48 [DEBUG] canRegister - Check to see if user admin can register
+2018/04/19 15:16:48 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:48 [DEBUG] Validate ID
+2018/04/19 15:16:48 [DEBUG] An affiliation is required for identity type user
+2018/04/19 15:16:48 [DEBUG] Validating affiliation: org1
+2018/04/19 15:16:48 [DEBUG] DB: Get affiliation org1
+2018/04/19 15:16:48 [DEBUG] Registering user id: User1@org2.artxchg2.com
+2018/04/19 15:16:48 [DEBUG] Max enrollment value verification - User specified max enrollment: -1, CA max enrollment: -1
+2018/04/19 15:16:48 [DEBUG] DB: Getting identity User1@org2.artxchg2.com
+2018/04/19 15:16:48 [DEBUG] DB: Add identity User1@org2.artxchg2.com
+2018/04/19 15:16:48 [DEBUG] Successfully added identity User1@org2.artxchg2.com to the database
+2018/04/19 15:16:48 [DEBUG] Registration completed - sending response 0xc42000e7e8
+2018/04/19 15:16:48 [INFO] 127.0.0.1:43212 - "POST /register" 200
+2018/04/19 15:16:48 [DEBUG] Received request
+POST /enroll
+Authorization: Basic VXNlcjFAb3JnMi5hcnR4Y2hnMi5jb206c2VjcmV0
+{"hosts":["adam-VirtualBox"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBVzCB/gIBADBvMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxIDAeBgNV\nBAMMF1VzZXIxQG9yZzIuYXJ0eGNoZzIuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAE4gTY2X73CBqYMmYgZX1Enden4BUS+lDc6mt6EPlwy4TbLEWDjWNP0nco\n+1q/Y7s61iyrdaNSd1dnGDnqSf9vGKAtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0R\nBBMwEYIPYWRhbS1WaXJ0dWFsQm94MAoGCCqGSM49BAMCA0gAMEUCIQCEdgw/4e1a\nWsXpFjyzWJdMisMMGy2hBoSMakqt+19DwgIgf/ixwiJJstmx72WsXiw03+WvdJ+4\neGyoAgreMZ8awkw=\n-----END CERTIFICATE REQUEST-----\n","profile":"","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:48 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:48 [DEBUG] DB: Getting identity User1@org2.artxchg2.com
+2018/04/19 15:16:48 [DEBUG] DB: Login user User1@org2.artxchg2.com with max enrollments of -1 and state of 0
+2018/04/19 15:16:48 [DEBUG] Successfully incremented state for identity User1@org2.artxchg2.com to 1
+2018/04/19 15:16:48 [DEBUG] DB: identity User1@org2.artxchg2.com successfully logged in
+2018/04/19 15:16:48 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:48 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:48 [DEBUG] Enrollment request: {SignRequest:{Hosts:[adam-VirtualBox] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBVzCB/gIBADBvMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxIDAeBgNV
+BAMMF1VzZXIxQG9yZzIuYXJ0eGNoZzIuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
+AQcDQgAE4gTY2X73CBqYMmYgZX1Enden4BUS+lDc6mt6EPlwy4TbLEWDjWNP0nco
++1q/Y7s61iyrdaNSd1dnGDnqSf9vGKAtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0R
+BBMwEYIPYWRhbS1WaXJ0dWFsQm94MAoGCCqGSM49BAMCA0gAMEUCIQCEdgw/4e1a
+WsXpFjyzWJdMisMMGy2hBoSMakqt+19DwgIgf/ixwiJJstmx72WsXiw03+WvdJ+4
+eGyoAgreMZ8awkw=
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile: CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:48 [DEBUG] csrAuthCheck: enrollment ID=User1@org2.artxchg2.com, CommonName=User1@org2.artxchg2.com, Subject=<nil>
+2018/04/19 15:16:48 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:48 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:48 [INFO] signed certificate with serial number 281709430254212735920546088007368007985875290348
+2018/04/19 15:16:48 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:48 [DEBUG] Saved serial number as hex 315849a997cd954b3eac3d9bf67dbea7355688ec
+2018/04/19 15:16:48 [DEBUG] saved certificate with serial number 281709430254212735920546088007368007985875290348
+2018/04/19 15:16:48 [INFO] 127.0.0.1:43214 - "POST /enroll" 200
+2018/04/19 15:16:48 [DEBUG] Received request
+POST /enroll
+Authorization: Basic YWRtaW46YWRtaW5wdw==
+{"hosts":["peer0.org2.artxchg2.com","peer0"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBUzCB+wIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV\nBAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEtaej/rbSY1pzb/k+\nPmP9Ez8m45MIZWQKyNzelmVPv0g+y3rdAOTnG4xbMnvMmMvvIwwqaVP8eJ4c+DxK\nreY1y6A8MDoGCSqGSIb3DQEJDjEtMCswKQYDVR0RBCIwIIIXcGVlcjAub3JnMi5h\ncnR4Y2hnMi5jb22CBXBlZXIwMAoGCCqGSM49BAMCA0cAMEQCIH9KG83R8sC2I9DW\nJOmkFssb6FXyvCzCzOkNdjXsVq4VAiBprWYzA+t+7VDFitYk2o3nUM1FU7DEenol\ndsgHFzyzYQ==\n-----END CERTIFICATE REQUEST-----\n","profile":"tls","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:48 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:48 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:48 [DEBUG] DB: Login user admin with max enrollments of -1 and state of 2
+2018/04/19 15:16:48 [DEBUG] Successfully incremented state for identity admin to 3
+2018/04/19 15:16:48 [DEBUG] DB: identity admin successfully logged in
+2018/04/19 15:16:48 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:48 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:48 [DEBUG] Enrollment request: {SignRequest:{Hosts:[peer0.org2.artxchg2.com peer0] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBUzCB+wIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV
+BAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEtaej/rbSY1pzb/k+
+PmP9Ez8m45MIZWQKyNzelmVPv0g+y3rdAOTnG4xbMnvMmMvvIwwqaVP8eJ4c+DxK
+reY1y6A8MDoGCSqGSIb3DQEJDjEtMCswKQYDVR0RBCIwIIIXcGVlcjAub3JnMi5h
+cnR4Y2hnMi5jb22CBXBlZXIwMAoGCCqGSM49BAMCA0cAMEQCIH9KG83R8sC2I9DW
+JOmkFssb6FXyvCzCzOkNdjXsVq4VAiBprWYzA+t+7VDFitYk2o3nUM1FU7DEenol
+dsgHFzyzYQ==
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile:tls CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:48 [DEBUG] csrAuthCheck: enrollment ID=admin, CommonName=admin, Subject=<nil>
+2018/04/19 15:16:48 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:48 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:48 [INFO] signed certificate with serial number 342354377641909769193728541842625627296868051139
+2018/04/19 15:16:48 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:48 [DEBUG] Saved serial number as hex 3bf7b3843e4d0098c398aab4f536e52b3ea3a8c3
+2018/04/19 15:16:48 [DEBUG] saved certificate with serial number 342354377641909769193728541842625627296868051139
+2018/04/19 15:16:48 [INFO] 127.0.0.1:43216 - "POST /enroll" 200
+2018/04/19 15:16:49 [DEBUG] Received request
+POST /register
+Authorization: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNRekNDQWVtZ0F3SUJBZ0lVQ015RVIvRzc4MTNOdVB0SG5sVmpJWUt2VjNNd0NnWUlLb1pJemowRUF3SXcKYURFTE1Ba0dBMVVFQmhNQ1ZWTXhGekFWQmdOVkJBZ1REazV2Y25Sb0lFTmhjbTlzYVc1aE1SUXdFZ1lEVlFRSwpFd3RJZVhCbGNteGxaR2RsY2pFUE1BMEdBMVVFQ3hNR1JtRmljbWxqTVJrd0Z3WURWUVFERXhCbVlXSnlhV010ClkyRXRjMlZ5ZG1WeU1CNFhEVEU0TURReE9URXpNVEl3TUZvWERURTVNRFF4T1RFek1USXdNRm93WFRFTE1Ba0cKQTFVRUJoTUNWVk14RnpBVkJnTlZCQWdURGs1dmNuUm9JRU5oY205c2FXNWhNUlF3RWdZRFZRUUtFd3RJZVhCbApjbXhsWkdkbGNqRVBNQTBHQTFVRUN4TUdSbUZpY21sak1RNHdEQVlEVlFRREV3VmhaRzFwYmpCWk1CTUdCeXFHClNNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJPZFZaUVRiSk9manRGTE5mTEI2eWJhYVhHdGVKcEE2VnVyWVBNK0kKYm1CUEZpUDlvT09ObkdjOURUaWJ3RHcvanVGSEZ2SWtKbHloQkJqOGtiSVpuek9qZkRCNk1BNEdBMVVkRHdFQgovd1FFQXdJSGdEQU1CZ05WSFJNQkFmOEVBakFBTUIwR0ExVWREZ1FXQkJSSTBUL3poOElNTlpmcW5sYlYrNGExCk5STUViekFmQmdOVkhTTUVHREFXZ0JSUkxrNm9kWkVLZmJRSlo1dG1TS1lsTjlkR21UQWFCZ05WSFJFRUV6QVIKZ2c5aFpHRnRMVlpwY25SMVlXeENiM2d3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUloQU9pWk5meFdUMThhd2lQegpYS3FiTWY3dWYrSmVGNmNER2JaellHZ1F6THJOQWlBdzBMczFLOS8xWWNUbm1zM2JTTUVQWGtlcExWY054bENkCmhPRk9KZmRKdWc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==.MEUCIQDrrUfgi6E4uFQwIoCqcmxcHh1EqKgjd14+uFLSzAxR6AIgFPtzOWSF3An3DapM7aFzjQO7ZOM5BgJAtjIX7+vBj9I=
+{"id":"peer0.org2.artxchg2.com","type":"user","secret":"secret","max_enrollments":-1,"affiliation":"org1","attrs":[{"name":"","value":""}]}
+2018/04/19 15:16:49 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:49 [DEBUG] Checking for revocation/expiration of certificate owned by 'admin'
+2018/04/19 15:16:49 [DEBUG] DB: Get certificate by serial (8cc8447f1bbf35dcdb8fb479e55632182af5773) and aki (512e4ea875910a7db409679b6648a62537d74699)
+2018/04/19 15:16:49 [DEBUG] Successful authentication of 'admin'
+2018/04/19 15:16:49 [DEBUG] Register request received
+2018/04/19 15:16:49 [DEBUG] Received registration request from admin: &{RegistrationRequest:{Name:peer0.org2.artxchg2.com Type:user Secret:<<user-specified>> MaxEnrollments:-1 Affiliation:org1 Attributes:[{Name: Value:}] CAName:}}
+2018/04/19 15:16:49 [DEBUG] canRegister - Check to see if user admin can register
+2018/04/19 15:16:49 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:49 [DEBUG] Validate ID
+2018/04/19 15:16:49 [DEBUG] An affiliation is required for identity type user
+2018/04/19 15:16:49 [DEBUG] Validating affiliation: org1
+2018/04/19 15:16:49 [DEBUG] DB: Get affiliation org1
+2018/04/19 15:16:49 [DEBUG] Registering user id: peer0.org2.artxchg2.com
+2018/04/19 15:16:49 [DEBUG] Max enrollment value verification - User specified max enrollment: -1, CA max enrollment: -1
+2018/04/19 15:16:49 [DEBUG] DB: Getting identity peer0.org2.artxchg2.com
+2018/04/19 15:16:49 [DEBUG] DB: Add identity peer0.org2.artxchg2.com
+2018/04/19 15:16:49 [DEBUG] Successfully added identity peer0.org2.artxchg2.com to the database
+2018/04/19 15:16:49 [DEBUG] Registration completed - sending response 0xc42000e908
+2018/04/19 15:16:49 [INFO] 127.0.0.1:43218 - "POST /register" 200
+2018/04/19 15:16:49 [DEBUG] Received request
+POST /enroll
+Authorization: Basic cGVlcjAub3JnMi5hcnR4Y2hnMi5jb206c2VjcmV0
+{"hosts":["adam-VirtualBox"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBVzCB/gIBADBvMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxIDAeBgNV\nBAMTF3BlZXIwLm9yZzIuYXJ0eGNoZzIuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAEsXRATPPlX28eEomGwcKZR4CksJ97S9aOSyd98VxQvm744uovQ6aL1gg0\n0tSv3OVlp2iRCoYXFm2iAvIMbc0uzKAtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0R\nBBMwEYIPYWRhbS1WaXJ0dWFsQm94MAoGCCqGSM49BAMCA0gAMEUCIQD3TbshDgUr\nRiVrjNj1/pG+ZuiNgXXDiKfnqbNf1zLV+AIgeufm9nykt8mgPm6vpicqy24aNoLE\nr4zxhq7bp9WaeT8=\n-----END CERTIFICATE REQUEST-----\n","profile":"","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:49 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:49 [DEBUG] DB: Getting identity peer0.org2.artxchg2.com
+2018/04/19 15:16:49 [DEBUG] DB: Login user peer0.org2.artxchg2.com with max enrollments of -1 and state of 0
+2018/04/19 15:16:49 [DEBUG] Successfully incremented state for identity peer0.org2.artxchg2.com to 1
+2018/04/19 15:16:49 [DEBUG] DB: identity peer0.org2.artxchg2.com successfully logged in
+2018/04/19 15:16:49 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:49 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:49 [DEBUG] Enrollment request: {SignRequest:{Hosts:[adam-VirtualBox] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBVzCB/gIBADBvMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxIDAeBgNV
+BAMTF3BlZXIwLm9yZzIuYXJ0eGNoZzIuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
+AQcDQgAEsXRATPPlX28eEomGwcKZR4CksJ97S9aOSyd98VxQvm744uovQ6aL1gg0
+0tSv3OVlp2iRCoYXFm2iAvIMbc0uzKAtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0R
+BBMwEYIPYWRhbS1WaXJ0dWFsQm94MAoGCCqGSM49BAMCA0gAMEUCIQD3TbshDgUr
+RiVrjNj1/pG+ZuiNgXXDiKfnqbNf1zLV+AIgeufm9nykt8mgPm6vpicqy24aNoLE
+r4zxhq7bp9WaeT8=
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile: CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:49 [DEBUG] csrAuthCheck: enrollment ID=peer0.org2.artxchg2.com, CommonName=peer0.org2.artxchg2.com, Subject=<nil>
+2018/04/19 15:16:49 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:49 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:49 [INFO] signed certificate with serial number 554673612405882476670646801220092202633590626974
+2018/04/19 15:16:49 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:49 [DEBUG] Saved serial number as hex 61286cccd550d865cb3b7b06c33025ae69165a9e
+2018/04/19 15:16:49 [DEBUG] saved certificate with serial number 554673612405882476670646801220092202633590626974
+2018/04/19 15:16:49 [INFO] 127.0.0.1:43220 - "POST /enroll" 200
+2018/04/19 15:16:49 [DEBUG] Received request
+POST /enroll
+Authorization: Basic YWRtaW46YWRtaW5wdw==
+{"hosts":["peer1.org2.artxchg2.com","peer1"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBVDCB+wIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV\nBAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE9zqG9PE1gMYriBaz\n9mDzPAhxW31aGkWslr+4UwXFZo9hNjS+ewU6Phaw/4n1TwMpqW6m7Vt2DtRFcXkN\ns9y0aKA8MDoGCSqGSIb3DQEJDjEtMCswKQYDVR0RBCIwIIIXcGVlcjEub3JnMi5h\ncnR4Y2hnMi5jb22CBXBlZXIxMAoGCCqGSM49BAMCA0gAMEUCIQDl/1RNPdRc9Paz\na6MRK8km6zYvz0+DKY/9jfQ2IZnajgIgCYsBPrUUiOXSlQvWgKSrwnX6bzcGIuMW\njYzXWdpcHf8=\n-----END CERTIFICATE REQUEST-----\n","profile":"tls","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:49 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:49 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:49 [DEBUG] DB: Login user admin with max enrollments of -1 and state of 3
+2018/04/19 15:16:49 [DEBUG] Successfully incremented state for identity admin to 4
+2018/04/19 15:16:49 [DEBUG] DB: identity admin successfully logged in
+2018/04/19 15:16:49 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:49 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:49 [DEBUG] Enrollment request: {SignRequest:{Hosts:[peer1.org2.artxchg2.com peer1] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBVDCB+wIBADBdMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxDjAMBgNV
+BAMTBWFkbWluMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE9zqG9PE1gMYriBaz
+9mDzPAhxW31aGkWslr+4UwXFZo9hNjS+ewU6Phaw/4n1TwMpqW6m7Vt2DtRFcXkN
+s9y0aKA8MDoGCSqGSIb3DQEJDjEtMCswKQYDVR0RBCIwIIIXcGVlcjEub3JnMi5h
+cnR4Y2hnMi5jb22CBXBlZXIxMAoGCCqGSM49BAMCA0gAMEUCIQDl/1RNPdRc9Paz
+a6MRK8km6zYvz0+DKY/9jfQ2IZnajgIgCYsBPrUUiOXSlQvWgKSrwnX6bzcGIuMW
+jYzXWdpcHf8=
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile:tls CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:49 [DEBUG] csrAuthCheck: enrollment ID=admin, CommonName=admin, Subject=<nil>
+2018/04/19 15:16:49 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:49 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:49 [INFO] signed certificate with serial number 350021354678384817331311171934148476737917775903
+2018/04/19 15:16:49 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:49 [DEBUG] Saved serial number as hex 3d4f8018baa0a9a77e6e01a6684515d3afb7701f
+2018/04/19 15:16:49 [DEBUG] saved certificate with serial number 350021354678384817331311171934148476737917775903
+2018/04/19 15:16:49 [INFO] 127.0.0.1:43222 - "POST /enroll" 200
+2018/04/19 15:16:49 [DEBUG] Received request
+POST /register
+Authorization: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNRekNDQWVtZ0F3SUJBZ0lVQ015RVIvRzc4MTNOdVB0SG5sVmpJWUt2VjNNd0NnWUlLb1pJemowRUF3SXcKYURFTE1Ba0dBMVVFQmhNQ1ZWTXhGekFWQmdOVkJBZ1REazV2Y25Sb0lFTmhjbTlzYVc1aE1SUXdFZ1lEVlFRSwpFd3RJZVhCbGNteGxaR2RsY2pFUE1BMEdBMVVFQ3hNR1JtRmljbWxqTVJrd0Z3WURWUVFERXhCbVlXSnlhV010ClkyRXRjMlZ5ZG1WeU1CNFhEVEU0TURReE9URXpNVEl3TUZvWERURTVNRFF4T1RFek1USXdNRm93WFRFTE1Ba0cKQTFVRUJoTUNWVk14RnpBVkJnTlZCQWdURGs1dmNuUm9JRU5oY205c2FXNWhNUlF3RWdZRFZRUUtFd3RJZVhCbApjbXhsWkdkbGNqRVBNQTBHQTFVRUN4TUdSbUZpY21sak1RNHdEQVlEVlFRREV3VmhaRzFwYmpCWk1CTUdCeXFHClNNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJPZFZaUVRiSk9manRGTE5mTEI2eWJhYVhHdGVKcEE2VnVyWVBNK0kKYm1CUEZpUDlvT09ObkdjOURUaWJ3RHcvanVGSEZ2SWtKbHloQkJqOGtiSVpuek9qZkRCNk1BNEdBMVVkRHdFQgovd1FFQXdJSGdEQU1CZ05WSFJNQkFmOEVBakFBTUIwR0ExVWREZ1FXQkJSSTBUL3poOElNTlpmcW5sYlYrNGExCk5STUViekFmQmdOVkhTTUVHREFXZ0JSUkxrNm9kWkVLZmJRSlo1dG1TS1lsTjlkR21UQWFCZ05WSFJFRUV6QVIKZ2c5aFpHRnRMVlpwY25SMVlXeENiM2d3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUloQU9pWk5meFdUMThhd2lQegpYS3FiTWY3dWYrSmVGNmNER2JaellHZ1F6THJOQWlBdzBMczFLOS8xWWNUbm1zM2JTTUVQWGtlcExWY054bENkCmhPRk9KZmRKdWc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==.MEUCIQCYsY2GEkKvNuXx1d7b0ejJMBnKhSRoxIJ8fN8E3PvQ9gIgV8dx2dc+gV4mTIM8jkgWqo93eaQ+wmas3O0i1ItEznw=
+{"id":"peer1.org2.artxchg2.com","type":"user","secret":"secret","max_enrollments":-1,"affiliation":"org1","attrs":[{"name":"","value":""}]}
+2018/04/19 15:16:49 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:49 [DEBUG] Checking for revocation/expiration of certificate owned by 'admin'
+2018/04/19 15:16:49 [DEBUG] DB: Get certificate by serial (8cc8447f1bbf35dcdb8fb479e55632182af5773) and aki (512e4ea875910a7db409679b6648a62537d74699)
+2018/04/19 15:16:49 [DEBUG] Successful authentication of 'admin'
+2018/04/19 15:16:49 [DEBUG] Register request received
+2018/04/19 15:16:49 [DEBUG] Received registration request from admin: &{RegistrationRequest:{Name:peer1.org2.artxchg2.com Type:user Secret:<<user-specified>> MaxEnrollments:-1 Affiliation:org1 Attributes:[{Name: Value:}] CAName:}}
+2018/04/19 15:16:49 [DEBUG] canRegister - Check to see if user admin can register
+2018/04/19 15:16:49 [DEBUG] DB: Getting identity admin
+2018/04/19 15:16:49 [DEBUG] Validate ID
+2018/04/19 15:16:49 [DEBUG] An affiliation is required for identity type user
+2018/04/19 15:16:49 [DEBUG] Validating affiliation: org1
+2018/04/19 15:16:49 [DEBUG] DB: Get affiliation org1
+2018/04/19 15:16:49 [DEBUG] Registering user id: peer1.org2.artxchg2.com
+2018/04/19 15:16:49 [DEBUG] Max enrollment value verification - User specified max enrollment: -1, CA max enrollment: -1
+2018/04/19 15:16:49 [DEBUG] DB: Getting identity peer1.org2.artxchg2.com
+2018/04/19 15:16:49 [DEBUG] DB: Add identity peer1.org2.artxchg2.com
+2018/04/19 15:16:50 [DEBUG] Successfully added identity peer1.org2.artxchg2.com to the database
+2018/04/19 15:16:50 [DEBUG] Registration completed - sending response 0xc42000e190
+2018/04/19 15:16:50 [INFO] 127.0.0.1:43224 - "POST /register" 200
+2018/04/19 15:16:50 [DEBUG] Received request
+POST /enroll
+Authorization: Basic cGVlcjEub3JnMi5hcnR4Y2hnMi5jb206c2VjcmV0
+{"hosts":["adam-VirtualBox"],"certificate_request":"-----BEGIN CERTIFICATE REQUEST-----\nMIIBVjCB/gIBADBvMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp\nbmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxIDAeBgNV\nBAMTF3BlZXIxLm9yZzIuYXJ0eGNoZzIuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAEgDmz4/qH68bYr+QwNfvOC/dYcO0N4MgMic/fj13twA++09xvSCnXzVtv\n/TrSemFVcfeowLaG5A9+CtfnNDfg8aAtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0R\nBBMwEYIPYWRhbS1WaXJ0dWFsQm94MAoGCCqGSM49BAMCA0cAMEQCIAcxPbEut6yS\nLdisWvxi47UXFiYv25e72lxLrx4nISdIAiBsIW7nJAjNTS7flUuzzyB+ZBc/wB5t\nM9fuVPz+MQYGLQ==\n-----END CERTIFICATE REQUEST-----\n","profile":"","crl_override":"","label":"","CAName":""}
+2018/04/19 15:16:50 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:50 [DEBUG] DB: Getting identity peer1.org2.artxchg2.com
+2018/04/19 15:16:50 [DEBUG] DB: Login user peer1.org2.artxchg2.com with max enrollments of -1 and state of 0
+2018/04/19 15:16:50 [DEBUG] Successfully incremented state for identity peer1.org2.artxchg2.com to 1
+2018/04/19 15:16:50 [DEBUG] DB: identity peer1.org2.artxchg2.com successfully logged in
+2018/04/19 15:16:50 [DEBUG] Identity/Pass was correct
+2018/04/19 15:16:50 [DEBUG] Received request for endpoint enroll
+2018/04/19 15:16:50 [DEBUG] Enrollment request: {SignRequest:{Hosts:[adam-VirtualBox] Request:-----BEGIN CERTIFICATE REQUEST-----
+MIIBVjCB/gIBADBvMQswCQYDVQQGEwJVUzEXMBUGA1UECBMOTm9ydGggQ2Fyb2xp
+bmExFDASBgNVBAoTC0h5cGVybGVkZ2VyMQ8wDQYDVQQLEwZGYWJyaWMxIDAeBgNV
+BAMTF3BlZXIxLm9yZzIuYXJ0eGNoZzIuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D
+AQcDQgAEgDmz4/qH68bYr+QwNfvOC/dYcO0N4MgMic/fj13twA++09xvSCnXzVtv
+/TrSemFVcfeowLaG5A9+CtfnNDfg8aAtMCsGCSqGSIb3DQEJDjEeMBwwGgYDVR0R
+BBMwEYIPYWRhbS1WaXJ0dWFsQm94MAoGCCqGSM49BAMCA0cAMEQCIAcxPbEut6yS
+LdisWvxi47UXFiYv25e72lxLrx4nISdIAiBsIW7nJAjNTS7flUuzzyB+ZBc/wB5t
+M9fuVPz+MQYGLQ==
+-----END CERTIFICATE REQUEST-----
+ Subject:<nil> Profile: CRLOverride: Label: Serial:<nil> Extensions:[]} CAName:}
+2018/04/19 15:16:50 [DEBUG] csrAuthCheck: enrollment ID=peer1.org2.artxchg2.com, CommonName=peer1.org2.artxchg2.com, Subject=<nil>
+2018/04/19 15:16:50 [DEBUG] CSR authorization check passed
+2018/04/19 15:16:50 [DEBUG] Checking CSR fields to make sure that they do not exceed maximum character limits
+2018/04/19 15:16:50 [INFO] signed certificate with serial number 205333332347987921074941908429478877534082326994
+2018/04/19 15:16:50 [DEBUG] DB: Insert Certificate
+2018/04/19 15:16:50 [DEBUG] Saved serial number as hex 23f7770e86c49e8d77881d6591329887bcf861d2
+2018/04/19 15:16:50 [DEBUG] saved certificate with serial number 205333332347987921074941908429478877534082326994
+2018/04/19 15:16:50 [INFO] 127.0.0.1:43226 - "POST /enroll" 200
+2018/04/19 15:16:50 [DEBUG] Received request
+POST /cainfo
+Authorization: Basic YWRtaW46YWRtaW5wdw==
+{}
+2018/04/19 15:16:50 [DEBUG] Directing traffic to default CA
+2018/04/19 15:16:50 [DEBUG] Received request for server info
+2018/04/19 15:16:50 [INFO] 127.0.0.1:43228 - "POST /cainfo" 200

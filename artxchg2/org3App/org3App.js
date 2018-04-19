@@ -3,6 +3,7 @@
 // Functions from figure
 const hfc = require('fabric-client');
 let channel;
+
 const enrolUser = function(client, options) {
   return hfc.newDefaultKeyValueStore({ path: options.wallet_path })
     .then(wallet => {
@@ -94,22 +95,20 @@ function joinCh(opt, param) {
       if(typeof user === "undefined" || !user.isEnrolled())
         throw "User not enrolled";
 
-      var tx_id;
-      var genesis_block;
-      var targets;
       channel = initNetwork(client, opt, target);
 
-      tx_id = client.newTransactionID();
+      let tx_id = client.newTransactionID();
       let g_request = {
         txId :     tx_id
       };
 
       // get the genesis block from the orderer
       channel.getGenesisBlock(g_request).then((block) => {
-        genesis_block = block;
-        tx_id = client.newTransactionID();
+        let genesis_block = block;
+        let tx_id = client.newTransactionID();
+
         let j_request = {
-          targets : targets,
+          targets : target,
           block : genesis_block,
           txId :     tx_id
         };
@@ -118,14 +117,20 @@ function joinCh(opt, param) {
         return channel.joinChannel(j_request);  
 
       }).then((results) => {
-        if(results && results.response && results.response.status == 200) {
+
+        // throw "Response is " + JSON.stringify(results);
+
+        if(results[0] && results[0].response.status == 200) {
           throw "Response is GOOD";
+
         } else {
-          throw "Response is Bad";
+          throw "Response is BAD";
+
         }
       });
     })
     .catch(err => {
+
       console.log(err);
       throw err;
     });
@@ -138,7 +143,7 @@ const options = {
     user_id: 'Org3Admin',
     channel_id: 'org2',
     chaincode_id: 'artxchg2',
-    peer_url: 'grpc://localhost:12051',
+    peer_url: 'grpc://localhost:17051',
     orderer_url: 'grpc://localhost:7050'
   }
 };

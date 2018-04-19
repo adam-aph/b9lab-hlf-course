@@ -1,1 +1,35 @@
-proto: can't skip unknown wire type 7 for common.ConfigUpdate
+{
+	"channel_id": "org2",
+	"read_set": {
+		"groups": {
+			"Orderer": {
+				"mod_policy": "",
+				"version": "0"
+			}
+		},
+		"mod_policy": "",
+		"version": "0"
+	},
+	"type": 0,
+	"write_set": {
+		"groups": {
+			"Orderer": {
+				"mod_policy": "",
+				"values": {
+					"BatchSize": {
+						"mod_policy": "Admins",
+						"value": {
+							"absolute_max_bytes": 103809024,
+							"max_message_count": 10,
+							"preferred_max_bytes": 524288
+						},
+						"version": "1"
+					}
+				},
+				"version": "0"
+			}
+		},
+		"mod_policy": "",
+		"version": "0"
+	}
+}

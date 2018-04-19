@@ -5,37 +5,168 @@ networks:
   artxchg2:
 
 services:
-  orderer.artxchg2.com:
-    # name of service which will serve as an orderer in the fabric network
-    image: hyperledger/fabric-orderer:x86_64-1.0.0
-    # container name for the image ‘hyperledger/fabric-orderer’ which will have its instance in the docker container
-    container_name: orderer.artxchg2.com
+
+  zookeeper0:
+    container_name: zookeeper0
+    extends:
+      file: kafka.yaml
+      service: zookeeper
     environment:
-      # listening address for the orderer
-      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      # tells about the genesis block of this blockchain contains its information within a file
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      # location of  the genesis block info file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      # id of the msp (Membership Service Provider) defined in the ‘cypto-config.yaml’ (which will be defined later) for Orderer in the fabric network
-      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-      # directory location for the msp directory
-      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # enable the ‘Transport Layer Security’ for communicating with the orderer in the fabric network
-      - ORDERER_GENERAL_TLS_ENABLED=false
-    volumes:
-      # mapping the directories that are being used in the environment configurations
-      - ./orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-      - ./crypto-config/ordererOrganizations/artxchg2.com/orderers/orderer.artxchg2.com/msp:/var/hyperledger/orderer/msp
-    command: orderer
-    # to start the orderer in the docker
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    # sets the working directory for the orderer
-    ports:
-      # mapping the ports used by the docker internally
-      - 7050:7050
+      - ZOO_MY_ID=1
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      # # network name
+      - artxchg2
+
+  zookeeper1:
+    container_name: zookeeper1
+    extends:
+      file: kafka.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+    networks:
+      - artxchg2
+
+  zookeeper2:
+    container_name: zookeeper2
+    extends:
+      file: kafka.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=3
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+    networks:
+      - artxchg2
+
+  kafka0:
+    container_name: kafka0
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=0
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 9092:9092
+    networks:
+      - artxchg2
+
+  kafka1:
+    container_name: kafka1
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 10092:9092
+    networks:
+      - artxchg2
+
+  kafka2:
+    container_name: kafka2
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 11092:9092
+    networks:
+      - artxchg2
+
+  kafka3:
+    container_name: kafka3
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=3
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 12092:9092
+    networks:
+      - artxchg2
+
+  orderer0.artxchg2.com:
+    container_name: orderer0.artxchg2.com
+    extends:
+      file: orderer.yaml
+      service: orderer
+    volumes:
+      - ./crypto-config/ordererOrganizations/artxchg2.com/orderers/orderer0.artxchg2.com/msp:/var/hyperledger/orderer/msp
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+    networks:
+      - artxchg2
+
+  orderer1.artxchg2.com:
+    container_name: orderer1.artxchg2.com
+    extends:
+      file: orderer.yaml
+      service: orderer
+    volumes:
+      - ./crypto-config/ordererOrganizations/artxchg2.com/orderers/orderer1.artxchg2.com/msp:/var/hyperledger/orderer/msp
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+    networks:
+      - artxchg2
+
+  orderer2.artxchg2.com:
+    container_name: orderer2.artxchg2.com
+    extends:
+      file: orderer.yaml
+      service: orderer
+    volumes:
+      - ./crypto-config/ordererOrganizations/artxchg2.com/orderers/orderer2.artxchg2.com/msp:/var/hyperledger/orderer/msp
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+    networks:
       - artxchg2
 
   peer0.org1.artxchg2.com:
@@ -52,10 +183,12 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg2.com/peers/peer0.org1.artxchg2.com/msp:/etc/hyperledger/msp/peer
     ports:
-      - 8051:7051
-      - 8053:7053
+      - 13051:7051
+      - 13053:7053
     depends_on:
-      - orderer.artxchg2.com
+      - orderer0.artxchg2.com
+      - orderer1.artxchg2.com
+      - orderer2.artxchg2.com
     networks:
       - artxchg2
 
@@ -73,10 +206,12 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg2.com/peers/peer1.org1.artxchg2.com/msp:/etc/hyperledger/msp/peer
     ports:
-      - 9051:7051
-      - 9053:7053
+      - 14051:7051
+      - 14053:7053
     depends_on:
-      - orderer.artxchg2.com
+      - orderer0.artxchg2.com
+      - orderer1.artxchg2.com
+      - orderer2.artxchg2.com
     networks:
       - artxchg2
 
@@ -94,10 +229,12 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg2.com/peers/peer0.org2.artxchg2.com/msp:/etc/hyperledger/msp/peer
     ports:
-      - 10051:7051
-      - 10053:7053
+      - 15051:7051
+      - 15053:7053
     depends_on:
-      - orderer.artxchg2.com
+      - orderer0.artxchg2.com
+      - orderer1.artxchg2.com
+      - orderer2.artxchg2.com
     networks:
       - artxchg2
 
@@ -115,10 +252,12 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg2.com/peers/peer1.org2.artxchg2.com/msp:/etc/hyperledger/msp/peer
     ports:
-      - 11051:7051
-      - 11053:7053
+      - 16051:7051
+      - 16053:7053
     depends_on:
-      - orderer.artxchg2.com
+      - orderer0.artxchg2.com
+      - orderer1.artxchg2.com
+      - orderer2.artxchg2.com
     networks:
       - artxchg2
 
@@ -136,10 +275,12 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org3.artxchg2.com/peers/peer0.org3.artxchg2.com/msp:/etc/hyperledger/msp/peer
     ports:
-      - 12051:7051
-      - 12053:7053
+      - 17051:7051
+      - 17053:7053
     depends_on:
-      - orderer.artxchg2.com
+      - orderer0.artxchg2.com
+      - orderer1.artxchg2.com
+      - orderer2.artxchg2.com
     networks:
       - artxchg2
 
@@ -157,10 +298,12 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/market.artxchg2.com/peers/peer0.market.artxchg2.com/msp:/etc/hyperledger/msp/peer
     ports:
-      - 13051:7051
-      - 13053:7053
+      - 18051:7051
+      - 18053:7053
     depends_on:
-      - orderer.artxchg2.com
+      - orderer0.artxchg2.com
+      - orderer1.artxchg2.com
+      - orderer2.artxchg2.com
     networks:
       - artxchg2
 
@@ -177,7 +320,6 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg2.com:/etc/hyperledger/msp
     depends_on:
-      - orderer.artxchg2.com
       - peer0.org1.artxchg2.com
     networks:
       - artxchg2
@@ -195,7 +337,6 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org1.artxchg2.com:/etc/hyperledger/msp
     depends_on:
-      - orderer.artxchg2.com
       - peer1.org1.artxchg2.com
     networks:
       - artxchg2
@@ -213,7 +354,6 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg2.com:/etc/hyperledger/msp
     depends_on:
-      - orderer.artxchg2.com
       - peer0.org2.artxchg2.com
     networks:
       - artxchg2
@@ -231,7 +371,6 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org2.artxchg2.com:/etc/hyperledger/msp
     depends_on:
-      - orderer.artxchg2.com
       - peer1.org2.artxchg2.com
     networks:
       - artxchg2
@@ -249,7 +388,6 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org3.artxchg2.com:/etc/hyperledger/msp
     depends_on:
-      - orderer.artxchg2.com
       - peer0.org3.artxchg2.com
     networks:
       - artxchg2

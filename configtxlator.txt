@@ -6,7 +6,7 @@ Run configtxlator:
 	configtxlator start &
 
 Fetch current setup:
-	docker exec cli.ArtMarket bash -c 'peer channel fetch config ./channels/config_block.pb -c org1 -o orderer.artxchg2.com:7050'
+	docker exec cli.ArtMarket bash -c 'peer channel fetch config ./channels/config_block.pb -c org2 -o orderer.artxchg2.com:7050'
 	mv channels/config_block.pb ./config_block.pb
 
 Translate it from PB to JSON:
@@ -16,27 +16,29 @@ Strip headers:
 	jq .data.data[0].payload.data.config config_block.json > config.json
 
 Create updated setup:
-	cp config.json config2.json
+	cp config.json config_org.json
+	mv config.json config_upd.json
+	# change some network parameters
 	vim config2.json
 
 Encode original config to PB:
-	curl -X POST --data-binary @config.json http://127.0.0.1:7059/protolator/encode/common.Config > config.pb
+	curl -X POST --data-binary @config_org.json http://127.0.0.1:7059/protolator/encode/common.Config > config_org.pb
 
 Encode updated config to PB:
-	curl -X POST --data-binary @config2.json http://127.0.0.1:7059/protolator/encode/common.Config > config2.pb
+	curl -X POST --data-binary @config_upd.json http://127.0.0.1:7059/protolator/encode/common.Config > config_upd.pb
 
 Create delta update:
-	curl -X POST -F original=@config.pb -F updated=@config2.pb http://127.0.0.1:7059/configtxlator/compute/update-from-configs -F channel=org1 > config_update.pb
+	curl -X POST -F original=@config_org.pb -F updated=@config_upd.pb http://127.0.0.1:7059/configtxlator/compute/update-from-configs -F channel=org2 > config_update.pb
 
 Translate delta update from PB to JSON:
 	curl -X POST --data-binary @config_update.pb http://127.0.0.1:7059/protolator/decode/common.ConfigUpdate > config_update.json
 
 Wrap it into headers envelope:
-	echo '{"payload":{"header":{"channel_header":{"channel_id":"org1", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' > config_update_as_envelope.json
+	echo '{"payload":{"header":{"channel_header":{"channel_id":"org2", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' > config_update_as_envelope.json
 
 Translate it back to PB:
 	curl -X POST --data-binary @config_update_as_envelope.json http://127.0.0.1:7059/protolator/encode/common.Envelope > config_update_as_envelope.pb
 
 Update channel configuration:
 	mv config_update_as_envelope.pb channels/config_update_as_envelope.pb
-	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update_as_envelope.pb -o orderer.artxchg2.com:7050 -c org1'
+	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update_as_envelope.pb -o orderer.artxchg2.com:7050 -c org2'
