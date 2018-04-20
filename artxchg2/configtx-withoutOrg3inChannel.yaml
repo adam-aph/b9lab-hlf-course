@@ -1,0 +1,112 @@
+Profiles:
+
+    ARTXCHG2OrdererGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            ARTXCHG2:
+                Organizations:
+                    - *Org1
+                    - *Org2
+                    - *Org3
+                    - *ArtMarket
+
+    Org1Channel:
+        Consortium: ARTXCHG2
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Org1
+                - *ArtMarket
+    Org2Channel:
+        Consortium: ARTXCHG2
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Org2
+                - *ArtMarket
+
+Organizations:
+
+    - &OrdererOrg
+        Name: OrdererMSP
+        ID: OrdererMSP
+
+        MSPDir: crypto-config/ordererOrganizations/artxchg2.com/msp
+
+    - &Org1
+        Name: Org1MSP
+        ID: Org1MSP
+
+        MSPDir: crypto-config/peerOrganizations/org1.artxchg2.com/msp
+
+        AnchorPeers:
+            - Host: peer0.org1.artxchg2.com
+              Port: 7051
+            - Host: peer1.org1.artxchg2.com
+              Port: 7051
+
+    - &Org2
+        Name: Org2MSP
+        ID: Org2MSP
+
+        MSPDir: crypto-config/peerOrganizations/org2.artxchg2.com/msp
+
+        AnchorPeers:
+            - Host: peer0.org2.artxchg2.com
+              Port: 7051
+            - Host: peer1.org2.artxchg2.com
+              Port: 7051
+
+    - &Org3
+        Name: Org3MSP
+        ID: Org3MSP
+
+        MSPDir: crypto-config/peerOrganizations/org3.artxchg2.com/msp
+
+        AnchorPeers:
+            - Host: peer0.org3.artxchg2.com
+              Port: 7051
+
+    - &ArtMarket
+        Name: ArtMarketMSP
+        ID: ArtMarketMSP
+
+        MSPDir: crypto-config/peerOrganizations/market.artxchg2.com/msp
+
+        AnchorPeers:
+            - Host: peer0.market.artxchg2.com
+              Port: 7051
+
+Orderer: &OrdererDefaults
+    OrdererType: kafka
+
+    Addresses:
+        - orderer0.artxchg2.com:7050
+        - orderer1.artxchg2.com:7050
+        - orderer2.artxchg2.com:7050
+
+    BatchTimeout: 2s
+
+    BatchSize:
+
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+
+
+    Kafka:
+        Brokers:
+            - kafka0:9092
+            - kafka1:9092
+            - kafka2:9092
+            - kafka3:9092
+
+    Organizations:
+
+
+Application: &ApplicationDefaults
+    Organizations:
+        

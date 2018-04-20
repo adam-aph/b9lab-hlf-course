@@ -4,41 +4,40 @@ Q1. Use configtxlator to update the channel configuration. How does it work,
 Run configtxlator:
 	export PATH=/home/adam/hlf/FabricBinaries/bin:$PATH
 	configtxlator start &
-
+ 
 Fetch current setup:
-	docker exec cli.ArtMarket bash -c 'peer channel fetch config ./channels/config_block.pb -c org2 -o orderer.artxchg2.com:7050'
-	mv channels/config_block.pb ./config_block.pb
+	docker exec cli.ArtMarket bash -c 'peer channel fetch config ./channels/config_block-withoutOrg3inChannel.pb -c org2 -o orderer0.artxchg2.com:7050'
+	mv channels/config_block-withoutOrg3inChannel.pb ./config_block-withoutOrg3inChannel.pb
 
 Translate it from PB to JSON:
-	curl -X POST --data-binary @config_block.pb http://127.0.0.1:7059/protolator/decode/common.Block > config_block.json
+	curl -X POST --data-binary @config_block-withoutOrg3inChannel.pb http://127.0.0.1:7059/protolator/decode/common.Block > config_block-withoutOrg3inChannel.json
 
 Strip headers:
-	jq .data.data[0].payload.data.config config_block.json > config.json
+	jq .data.data[0].payload.data.config config_block-withoutOrg3inChannel.json > config-withoutOrg3inChannel.json
 
 Create updated setup:
-	cp config.json config_org.json
-	mv config.json config_upd.json
-	# change some network parameters
-	vim config2.json
+	cp config-withoutOrg3inChannel.json config-withOrg3inChannel.json
+	# add Org3 to the channel
+	vim config-withOrg3inChannel.json
 
 Encode original config to PB:
-	curl -X POST --data-binary @config_org.json http://127.0.0.1:7059/protolator/encode/common.Config > config_org.pb
+	curl -X POST --data-binary @config-withoutOrg3inChannel.json http://127.0.0.1:7059/protolator/encode/common.Config > config-withoutOrg3inChannel.pb
 
 Encode updated config to PB:
-	curl -X POST --data-binary @config_upd.json http://127.0.0.1:7059/protolator/encode/common.Config > config_upd.pb
+	curl -X POST --data-binary @config-withOrg3inChannel.json http://127.0.0.1:7059/protolator/encode/common.Config > config-withOrg3inChannel.pb
 
 Create delta update:
-	curl -X POST -F original=@config_org.pb -F updated=@config_upd.pb http://127.0.0.1:7059/configtxlator/compute/update-from-configs -F channel=org2 > config_update.pb
+	curl -X POST -F original=@config-withoutOrg3inChannel.pb -F updated=@config-withOrg3inChannel.pb http://127.0.0.1:7059/configtxlator/compute/update-from-configs -F channel=org2 > config_update-Org3inChannel.pb
 
 Translate delta update from PB to JSON:
-	curl -X POST --data-binary @config_update.pb http://127.0.0.1:7059/protolator/decode/common.ConfigUpdate > config_update.json
+	curl -X POST --data-binary @config_update-Org3inChannel.pb http://127.0.0.1:7059/protolator/decode/common.ConfigUpdate > config_update-Org3inChannel.json
 
 Wrap it into headers envelope:
-	echo '{"payload":{"header":{"channel_header":{"channel_id":"org2", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' > config_update_as_envelope.json
+	echo '{"payload":{"header":{"channel_header":{"channel_id":"org2", "type":2}},"data":{"config_update":'$(cat config_update-Org3inChannel.json)'}}}' > config_update-Org3inChannel-asEnvelope.json
 
 Translate it back to PB:
-	curl -X POST --data-binary @config_update_as_envelope.json http://127.0.0.1:7059/protolator/encode/common.Envelope > config_update_as_envelope.pb
+	curl -X POST --data-binary @config_update-Org3inChannel-asEnvelope.json http://127.0.0.1:7059/protolator/encode/common.Envelope > config_update-Org3inChannel-asEnvelope.pb
 
 Update channel configuration:
-	mv config_update_as_envelope.pb channels/config_update_as_envelope.pb
-	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update_as_envelope.pb -o orderer.artxchg2.com:7050 -c org2'
+	mv config_update-Org3inChannel-asEnvelope.pb channels/config_update-Org3inChannel-asEnvelope.pb
+	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update-Org3inChannel-asEnvelope.pb -o orderer0.artxchg2.com:7050 -c org2'
