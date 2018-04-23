@@ -42,9 +42,16 @@ Wrap it into headers envelope:
 Translate it back to PB:
 	curl -X POST --data-binary @config_update-Org3inChannel-asEnvelope.json http://127.0.0.1:7059/protolator/encode/common.Envelope > config_update-Org3inChannel-asEnvelope.pb
 
-Sign it:
+Sign it by ArtMarket:
 	mv config_update-Org3inChannel-asEnvelope.pb channels/config_update-Org3inChannel-asEnvelope.pb
 	docker exec cli.ArtMarket bash -c 'peer channel signconfigtx -f ./channels/config_update-Org3inChannel-asEnvelope.pb -o orderer0.artxchg2.com:7050'
 
+Sign it by Org2:
+	docker exec cli0.Org2 bash -c 'peer channel signconfigtx -f ./channels/config_update-Org3inChannel-asEnvelope.pb -o orderer0.artxchg2.com:7050'
+
 Update channel configuration:
 	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update-Org3inChannel-asEnvelope.pb -o orderer0.artxchg2.com:7050 -c org2'
+
+Verify it works:
+	docker exec cli0.Org3 bash -c 'peer channel join -b org2.block'
+	
