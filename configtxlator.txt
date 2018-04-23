@@ -1,6 +1,9 @@
 Q1. Use configtxlator to update the channel configuration. How does it work, 
     how can you join Org3 to existing channel?
 
+Example for artxchg2 project
+----------------------------
+
 Run configtxlator:
 	export PATH=/home/adam/hlf/FabricBinaries/bin:$PATH
 	configtxlator start &
@@ -17,7 +20,8 @@ Strip headers:
 
 Create updated setup:
 	cp config-withoutOrg3inChannel.json config-withOrg3inChannel.json
-	# add Org3 to the channel
+	# add Org3 to the channel by updating the config-withOrg3inChannel.json
+	# NOTE: for this example config-withOrg3inChannel.json was actually created by fetching channel configuration with Org3 in channel
 	vim config-withOrg3inChannel.json
 
 Encode original config to PB:
@@ -38,6 +42,9 @@ Wrap it into headers envelope:
 Translate it back to PB:
 	curl -X POST --data-binary @config_update-Org3inChannel-asEnvelope.json http://127.0.0.1:7059/protolator/encode/common.Envelope > config_update-Org3inChannel-asEnvelope.pb
 
-Update channel configuration:
+Sign it:
 	mv config_update-Org3inChannel-asEnvelope.pb channels/config_update-Org3inChannel-asEnvelope.pb
+	docker exec cli.ArtMarket bash -c 'peer channel signconfigtx -f ./channels/config_update-Org3inChannel-asEnvelope.pb -o orderer0.artxchg2.com:7050'
+
+Update channel configuration:
 	docker exec cli.ArtMarket bash -c 'peer channel update -f ./channels/config_update-Org3inChannel-asEnvelope.pb -o orderer0.artxchg2.com:7050 -c org2'
