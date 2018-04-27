@@ -19,12 +19,14 @@ to prove authenticity of particular art work and keep history of buy/sell
 transactions.
 
 The advantage will be to control art market through proven digital solution,
-improving provenance and reducing art forgery.
+improving provenance and reducing art forgery. Also the ledger will create 
+unmutable proof of ovnership. It will provide also proper level of anonimity.
 
 The disadvantage will be that it will work great for digital art, but other
 art artifacts (paintings, sculptures etc) will need to first obtain some
 kind of digital signature to enter the blockchain network and this will open
-some new possibility for the forgery.
+some new possibility for the forgery. It will not resolve also problems with
+proper assesment of ancient art by professionals (who can still make mistakes).
 
 Q3. Design a network to help the art market. Think about Peers, CA, Channels
     and Smart Contracts. Make a critical analysis.

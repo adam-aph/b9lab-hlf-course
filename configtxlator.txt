@@ -4,6 +4,12 @@ Q1. Use configtxlator to update the channel configuration. How does it work,
 Example for artxchg2 project
 ----------------------------
 
+The network is initially configured with Org1, Org2, Org3, ArtMarket and OrgOrderer organizations. There are two channels defined,
+org1 = {Org1, ArtMarket} and org2 = {Org2, ArtMarket}. So initially Org3 exists outside any channels and will be added to channel
+org2 during this example. Using configtxlator tool allows to decode/encode internal network data from protobuf binarny format to
+json and in the opposite way.
+
+
 Run configtxlator:
 	export PATH=/home/adam/hlf/FabricBinaries/bin:$PATH
 	configtxlator start &

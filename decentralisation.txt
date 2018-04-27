@@ -14,6 +14,13 @@ Both Swarm and Kubernetes allow for cluster management in multi-host environment
 automatic scaling, service discovery, load balancing etc. Both these frameworks
 can be configured via Hyperledger Composer tool. Example for Fabric and 
 Kubernetes: https://github.com/IBM/blockchain-network-on-kubernetes
+More details on Swarm: It is creating single virtual Docker host from all Docker
+images which it controls. So it creates network which connects these individual images, 
+launches them in defined clusters (called services), which can be moved from one docker node
+to another. This is similar like docker compose, except swarm works with multiple hosts.
+More details on Kubernetes: besides similar features like Swarm, Kubernetes seems to
+have bigger community behind it and is backed by Google and RedHat. It seems to be better
+production ready and has nice features like autoscaling based on CPU utilization.
     
 Q3. You can use IBM Cloud. Tell us what it offers in regard to Hyperledger
     Fabric.
@@ -30,4 +37,5 @@ managing and terminating blockchains. It provides a multi-tenant chain service
 efficiently and automatically on top of various infrastructures, e.g., baremetal,
 virtual machine, and more container platforms.
 https://www.hyperledger.org/projects/cello
+Cello uses for underly structure native Docker, Swarm and Kubernetes.
 
